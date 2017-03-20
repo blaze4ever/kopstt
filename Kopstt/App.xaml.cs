@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using Autofac;
+using Kopstt.Core.AutoFac;
 
 namespace Kopstt
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        private void OnStartup(object sender, StartupEventArgs e)
+        {
+            var container = DI.CreateBuilder().Build();
+
+            var splash_screen_view = container.Resolve<MainWindow>();
+
+            splash_screen_view.Show();
+        }
     }
 }

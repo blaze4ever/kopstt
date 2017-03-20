@@ -1,13 +1,12 @@
 ﻿namespace Kopstt.Classes
 {
-    using System.Windows.Controls;
     using Core;
 
     public class SetOnStartup
     {
-        WndowsRegistry windows_registry;
+        IWndowsRegistry windows_registry;
 
-        public SetOnStartup(WndowsRegistry windows_registry)
+        public SetOnStartup(IWndowsRegistry windows_registry)
         {
             this.windows_registry = windows_registry;
         }
