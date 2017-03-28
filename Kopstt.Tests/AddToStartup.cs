@@ -21,9 +21,7 @@ namespace Kopstt.Tests
         public void test_add_chcheckbox_checked_to_registry()
         {
             //arragne
-
             var windows_registry = container.Resolve<IWndowsRegistry>();
-
             var set_on_startup = container.Resolve<SetOnStartup>();
 
             set_on_startup.AppName = "Kopstt";
