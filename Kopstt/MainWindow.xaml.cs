@@ -10,6 +10,7 @@ namespace Kopstt
     using System;
     using System.Windows;
     using System.Windows.Media.Animation;
+    using Autofac;
 
     public partial class MainWindow
     {
@@ -20,14 +21,17 @@ namespace Kopstt
         private Inbox _inbox;
         private SevenDays _7days;
         private DependencyObject current_module;
-        public MainWindow(SetOnStartup add_to_registry)
+
+        public MainWindow(SetOnStartup add_to_registry, Today today, Inbox inbox, SevenDays seven_days)
         {
-            _addToRegistry = add_to_registry;
             InitializeComponent();
 
-            _today = new Today();
-            _inbox = new Inbox();
-            _7days = new SevenDays();
+            _addToRegistry = add_to_registry;
+
+
+            _today = today;
+            _inbox = inbox;
+            _7days = seven_days;
 
             current_module = _today;
 

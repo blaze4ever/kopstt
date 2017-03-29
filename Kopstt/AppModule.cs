@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Kopstt.Classes;
+using Kopstt.Modules;
 
 namespace Kopstt
 {
@@ -9,6 +10,9 @@ namespace Kopstt
         {
             builder.RegisterType<MainWindow>();
             builder.RegisterType<SetOnStartup>();
+            builder.RegisterType<Inbox>().SingleInstance();
+            builder.RegisterType<SevenDays>().SingleInstance();
+            builder.RegisterType<Today>().SingleInstance();
         }
     }
 }
