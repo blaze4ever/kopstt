@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Kopstt.Classes;
+using Kopstt.Classes.SwitchingModules;
 using Kopstt.Modules;
 
 namespace Kopstt
@@ -13,6 +14,8 @@ namespace Kopstt
             builder.RegisterType<Inbox>().SingleInstance();
             builder.RegisterType<SevenDays>().SingleInstance();
             builder.RegisterType<Today>().SingleInstance();
+            builder.RegisterType<FadeAnimation>();
+            builder.RegisterType<ClearModules>();
         }
     }
 }

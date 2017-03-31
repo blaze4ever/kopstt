@@ -87,6 +87,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\SwitchingModules\ClearModules.cs" />
+    <Compile Include="Classes\SwitchingModules\FadeAnimation.cs" />
     <Compile Include="Classes\SetOnStartup.cs" />
     <Compile Include="AppModule.cs" />
     <Compile Include="MainWindow.xaml.cs">

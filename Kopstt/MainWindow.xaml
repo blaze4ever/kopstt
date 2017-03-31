@@ -5,19 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-                      Width="1920"
-                      Height="1080"
-        Title="Kopstt"  WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Width="1920"
+        Height="1080"
+        EnableDWMDropShadow="True"
+        Title="Kopstt"  
+        WindowStartupLocation="CenterScreen" 
+        WindowState="Maximized" 
+        WindowStyle="SingleBorderWindow" 
+        BorderBrush="Aqua">
     <Window.Resources>
         <ResourceDictionary>
-            <Style x:Key="MenuItem" TargetType="StackPanel">
-                <Setter Property="Background" Value="#333"/>
-                <Setter Property="Orientation" Value="Horizontal"/>
-            </Style>
-            <Style x:Key="PickedMenu" TargetType="StackPanel">
-                <Setter Property="Background" Value="Black"/>
-                <Setter Property="Orientation" Value="Horizontal"/>
-            </Style>
             <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
                 <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="24"></Setter>
                 <Setter Property="Background" Value="#333"></Setter>
@@ -41,54 +38,62 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"/>
-            <ColumnDefinition Width="85*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Background="#333" Name="Menu">
-            <StackPanel Style="{DynamicResource MenuItem}" MouseLeftButtonUp="pickMenuItem" DataContext="Inbox">
-                <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
-                <Label Content="Inbox" Style="{DynamicResource MenuItemLabel}" />
-                <Border CornerRadius="50" BorderThickness="2" BorderBrush="#fff"  Margin="2" Width="40" Height="40">
-                    <Label Content="99+" Margin="-2 -4 0 0" VerticalContentAlignment="Center" HorizontalAlignment="Center" FontSize="16" Foreground="#fff"/>
-                </Border>
-            </StackPanel>
-            <StackPanel Style="{DynamicResource MenuItem}" MouseLeftButtonUp="pickMenuItem" DataContext="Today">
-                <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
-                <Label Content="Today" Style="{DynamicResource MenuItemLabel}" />
-            </StackPanel>
-            <StackPanel Style="{DynamicResource MenuItem}" MouseLeftButtonUp="pickMenuItem" DataContext="7days">
-                <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
-                <Label Content="Next 7 days" Style="{DynamicResource MenuItemLabel}" />
-            </StackPanel>
-            <StackPanel Style="{DynamicResource MenuItem}" MouseLeftButtonUp="pickMenuItem" DataContext="Projects">
-                <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
-                <Label Content="Projects" Style="{DynamicResource MenuItemLabel}" />
-            </StackPanel>
-            <StackPanel Style="{DynamicResource MenuItem}" MouseLeftButtonUp="pickMenuItem" DataContext="Categories">
-                <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
-                <Label Content="Categories" Style="{DynamicResource MenuItemLabel}" />
-            </StackPanel>
-            <StackPanel Style="{DynamicResource MenuItem}" MouseLeftButtonUp="pickMenuItem" DataContext="Calendar">
-                <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
-                <Label Content="Calendar" Style="{DynamicResource MenuItemLabel}" />
-            </StackPanel>
-            <StackPanel Style="{DynamicResource MenuItem}" MouseLeftButtonUp="pickMenuItem" DataContext="Teams">
-                <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
-                <Label Content="Teams" Style="{DynamicResource MenuItemLabel}" />
-            </StackPanel>
-            <StackPanel Style="{DynamicResource MenuItem}" MouseLeftButtonUp="pickMenuItem" DataContext="Settings">
-                <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
-                <Label Content="Settings" Style="{DynamicResource MenuItemLabel}" />
-            </StackPanel>
-        </StackPanel>
-        <ContentPresenter DataContextChanged="animateContent"  Name="Content" Grid.Column="1" />
-        <StackPanel>
-            <ProgressBar Name="Progress" Height="20" Visibility="Collapsed"></ProgressBar>
-            <DataGrid Name="dataGridView1" Visibility="Collapsed"></DataGrid>
-            <Button Content="Add to registry" Click="addToRegistry" Visibility="Collapsed"/>
-        </StackPanel>
-    </Grid>
+    <StackPanel Background="#333">
+
+        <TabControl Background="#fff"
+            Margin="-2"
+                    
+    BorderThickness="0,0,0,0" HorizontalContentAlignment="Stretch"
+    Height="{Binding Path=ActualHeight,
+         RelativeSource={RelativeSource Mode=FindAncestor,
+            AncestorType={x:Type Window}}}" TabStripPlacement="Left"  HorizontalAlignment="Stretch">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Width" Value="200" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border">
+                                    <ContentPresenter 
+                                        Margin="0"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="Black" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="#333" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0">
+                        <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
+                        <Label Content="Inbox" Style="{DynamicResource MenuItemLabel}" />
+                    </StackPanel>
+                </TabItem.Header>
+                test2
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
+                        <Label Content="Today" Style="{DynamicResource MenuItemLabel}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    test1
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </controls:MetroWindow>
 

@@ -2,7 +2,6 @@
 using System.Data;
 using System.Threading;
 using System.Windows.Controls;
-using Kopstt.Classes;
 using Kopstt.Modules;
 
 namespace Kopstt
@@ -11,6 +10,8 @@ namespace Kopstt
     using System.Windows;
     using System.Windows.Media.Animation;
     using Autofac;
+    using Classes;
+    using Classes.SwitchingModules;
 
     public partial class MainWindow
     {
@@ -21,11 +22,20 @@ namespace Kopstt
         private Inbox _inbox;
         private SevenDays _7days;
         private DependencyObject current_module;
+        private FadeAnimation _fade;
+        private ClearModules _clear;
 
-        public MainWindow(SetOnStartup add_to_registry, Today today, Inbox inbox, SevenDays seven_days)
+        public MainWindow(SetOnStartup add_to_registry, 
+                            Today today,
+                            Inbox inbox,
+                            SevenDays seven_days,
+                            FadeAnimation fade,
+                            ClearModules clear)
         {
             InitializeComponent();
 
+            _fade = fade;
+            _clear = clear;
             _addToRegistry = add_to_registry;
 
 
@@ -35,7 +45,7 @@ namespace Kopstt
 
             current_module = _today;
 
-            Content.Content = current_module;
+            //Content.Content = current_module;
 
             worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
@@ -68,20 +78,12 @@ namespace Kopstt
 
         void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Progress.Value = e.ProgressPercentage;
+           // Progress.Value = e.ProgressPercentage;
         }
 
-        private void clearPickedMenu()
-        {
-            foreach (StackPanel menu_item in Menu.Children)
-            {
-                menu_item.Style = FindResource("MenuItem") as Style;
-            }
-        }
-
+       
         private void pickMenuItem(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            clearPickedMenu();
             var menu = sender as StackPanel;
             if (menu != null)
             {
@@ -89,51 +91,29 @@ namespace Kopstt
                 var module = menu.DataContext.ToString();
                 if (module == "Inbox")
                 {
-                    CreateFade(1, 0, current_module);
-                    CreateFade(0, 1, _inbox);
-
-                    current_module = _inbox;
+                    animateContent(_inbox);
 
                 }
                 else if (module == "Today")
                 {
-                    CreateFade(1, 0, current_module);
-                    CreateFade(0, 1, _today);
-
-                    current_module = _today;
+                    animateContent(_today);
                 }
                 else if (module == "7days")
                 {
-                    CreateFade(1, 0, current_module);
-                    CreateFade(0, 1, _7days);
-
-                    current_module = _7days;
+                    animateContent(_7days);
                 }
 
-                Content.Content = current_module;
-
+               // Content.Content = current_module;
             }
         }
 
-        private void animateContent(object sender, DependencyPropertyChangedEventArgs e)
+       
+        private void animateContent(DependencyObject _new_module)
         {
-            CreateFade(1, 0, _inbox);
-            CreateFade(0, 1, _today);
-        }
+         //   _fade.CreateFade(1, 0, current_module);
+         //   _fade.CreateFade(0, 1, _new_module);
 
-        private void CreateFade(double from, double to, DependencyObject element)
-        {
-            DoubleAnimation da = new DoubleAnimation();
-            da.Duration = new Duration(TimeSpan.FromSeconds(3));
-            da.From = from;
-            da.To = to;
-            Storyboard.SetTarget(da, element);
-            Storyboard.SetTargetProperty(da, new PropertyPath("Opacity"));
-
-            Storyboard sb = new Storyboard();
-            sb.Children.Add(da);
-            sb.Begin();
-
+        //    current_module = _new_module;
         }
 
     }
