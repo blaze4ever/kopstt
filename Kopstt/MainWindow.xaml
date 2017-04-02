@@ -17,7 +17,7 @@
         <ResourceDictionary>
             <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
                 <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="24"></Setter>
-                <Setter Property="Background" Value="#333"></Setter>
+                <Setter Property="Background" Value="#fff"></Setter>
                 <Setter Property="Foreground" Value="#fff"></Setter>
             </Style>
             <Style x:Key="MenuItemImage" TargetType="{x:Type Image}">
@@ -26,7 +26,7 @@
                 <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
             <Style x:Key="MenuItemLabel" TargetType="{x:Type Label}">
-                <Setter Property="Foreground" Value="#fff" />
+                <Setter Property="Foreground" Value="DodgerBlue" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="FontSize" Value="24" />
@@ -38,7 +38,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel Background="#333">
+    <StackPanel>
 
         <TabControl Background="#fff"
             Margin="-2"
@@ -49,23 +49,23 @@
             AncestorType={x:Type Window}}}" TabStripPlacement="Left"  HorizontalAlignment="Stretch">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
-                    <Setter Property="Width" Value="200" />
+                    <Setter Property="Width" Value="250" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="TabItem">
                                 <Border Name="Border">
                                     <ContentPresenter 
-                                        Margin="0"
+                                        Margin="30 0 0 0"
                                         VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
+                                        HorizontalAlignment="Left"
                                         ContentSource="Header"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="Black" />
+                                        <Setter TargetName="Border" Property="Background" Value="#ddd" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="Border" Property="Background" Value="#333" />
+                                        <Setter TargetName="Border" Property="Background" Value="#fff" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -93,7 +93,74 @@
                     test1
                 </TabItem.Content>
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
+                        <Label Content="Next 7 days" Style="{DynamicResource MenuItemLabel}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    test1
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
+                        <Label Content="Projects" Style="{DynamicResource MenuItemLabel}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    test1
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
+                        <Label Content="Categories" Style="{DynamicResource MenuItemLabel}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    test1
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
+                        <Label Content="Calendar" Style="{DynamicResource MenuItemLabel}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    test1
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
+                        <Label Content="Teams" Style="{DynamicResource MenuItemLabel}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    test1
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Data/images/logo.png" Style="{DynamicResource MenuItemImage}"/>
+                        <Label Content="Settings" Style="{DynamicResource MenuItemLabel}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    test1
+                </TabItem.Content>
+            </TabItem>
         </TabControl>
+
     </StackPanel>
 </controls:MetroWindow>
 

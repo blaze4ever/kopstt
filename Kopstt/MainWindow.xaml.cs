@@ -2,6 +2,7 @@
 using System.Data;
 using System.Threading;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Kopstt.Modules;
 
 namespace Kopstt
@@ -47,8 +48,7 @@ namespace Kopstt
 
             //Content.Content = current_module;
 
-            worker = new BackgroundWorker();
-            worker.WorkerReportsProgress = true;
+            worker = new BackgroundWorker {WorkerReportsProgress = true};
             worker.DoWork += new DoWorkEventHandler(worker_DoWork);
             worker.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
@@ -82,7 +82,7 @@ namespace Kopstt
         }
 
        
-        private void pickMenuItem(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void pickMenuItem(object sender, MouseButtonEventArgs e)
         {
             var menu = sender as StackPanel;
             if (menu != null)
@@ -110,10 +110,10 @@ namespace Kopstt
        
         private void animateContent(DependencyObject _new_module)
         {
-         //   _fade.CreateFade(1, 0, current_module);
-         //   _fade.CreateFade(0, 1, _new_module);
+            _fade.CreateFade(1, 0, current_module);
+            _fade.CreateFade(0, 1, _new_module);
 
-        //    current_module = _new_module;
+            current_module = _new_module;
         }
 
     }
