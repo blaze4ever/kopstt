@@ -80,7 +80,11 @@
                         <Label Content="Inbox" Style="{DynamicResource MenuItemLabel}" />
                     </StackPanel>
                 </TabItem.Header>
-                test2
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock Height="200" Width="400" Background="Beige" Name="SlackMessages"/>
+                    <TextBox Name="Message" />
+                    <Button Click="sendSlackMessage" Content="Send" />
+                </StackPanel>
             </TabItem>
             <TabItem>
                 <TabItem.Header>

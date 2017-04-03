@@ -8,6 +8,7 @@ using Kopstt.Modules;
 namespace Kopstt
 {
     using System;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Media.Animation;
     using Autofac;
@@ -53,6 +54,19 @@ namespace Kopstt
             worker.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             worker.RunWorkerAsync();
+
+        }
+
+
+        private async void sendSlackMessage(object sender, RoutedEventArgs e)
+        {
+            var url = "https://hooks.slack.com/services/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";
+            var webhookUrl = new Uri(url);
+            var slackClient = new SlackClient(webhookUrl);
+            var message = Message.Text;
+            var response = await slackClient.SendMessageAsync(message, "blaze");
+            var isValid = response.IsSuccessStatusCode ? "valid" : "invalid";
+            SlackMessages.Text = isValid;
         }
 
         private void addToRegistry(object sender, RoutedEventArgs e)
@@ -116,5 +130,6 @@ namespace Kopstt
             current_module = _new_module;
         }
 
+       
     }
 }
