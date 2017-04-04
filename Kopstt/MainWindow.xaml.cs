@@ -64,9 +64,11 @@ namespace Kopstt
             var webhookUrl = new Uri(url);
             var slackClient = new SlackClient(webhookUrl);
             var message = Message.Text;
-            var response = await slackClient.SendMessageAsync(message, "blaze");
-            var isValid = response.IsSuccessStatusCode ? "valid" : "invalid";
-            SlackMessages.Text = isValid;
+            var response = await slackClient.SendMessageAsync(message);
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Cannot send message to slack");
+            }
         }
 
         private void addToRegistry(object sender, RoutedEventArgs e)
@@ -130,6 +132,11 @@ namespace Kopstt
             current_module = _new_module;
         }
 
-       
+        private void openSettings(object sender, MouseButtonEventArgs e)
+        {
+            Menu.SelectedIndex = 0;
+            var settings = new Settings();
+            settings.ShowDialog();
+        }
     }
 }

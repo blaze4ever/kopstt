@@ -100,6 +100,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Modules\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\SevenDays.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -114,6 +118,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\SevenDays.xaml.cs">
       <DependentUpon>SevenDays.xaml</DependentUpon>
     </Compile>
@@ -161,6 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Data\images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\images\slack.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
