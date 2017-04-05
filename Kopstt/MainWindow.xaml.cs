@@ -108,7 +108,6 @@ namespace Kopstt
                 if (module == "Inbox")
                 {
                     animateContent(_inbox);
-
                 }
                 else if (module == "Today")
                 {

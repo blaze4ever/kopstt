@@ -31,13 +31,5 @@
 
             return response;
         }
-
-        public async Task<HttpResponseMessage> getMessages(
-           string channel = null, string username = null)
-        {
-            var response = await _httpClient.GetAsync(_webhookUrl);
-
-            return response;
-        }
     }
 }

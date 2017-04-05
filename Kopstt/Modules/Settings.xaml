@@ -14,10 +14,18 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="Margin" Value="0 10" />
         </Style>
+        <Style TargetType="StackPanel" x:Key="SettingHolder">
+            <Setter Property="Margin" Value="20" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
     </Window.Resources>
     <TabControl TabStripPlacement="Left">
+        <TabItem Header="Widget" >
+            
+        </TabItem>
         <TabItem Header="Integration" >
-            <StackPanel Margin="20" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <StackPanel Style="{DynamicResource SettingHolder}">
                 <Label Content="General" Style="{DynamicResource Heading}"></Label>
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
