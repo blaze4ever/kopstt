@@ -1,4 +1,6 @@
-﻿namespace Kopstt.Data.LocalDatabase
+﻿using System.Windows;
+
+namespace Kopstt.Data.LocalDatabase
 {
     using System;
     using System.Data.SQLite;
@@ -9,56 +11,81 @@
         private SQLiteConnection _db;
         public Database()
         {
-
+            dbConnect("test");
+            createTable();
+            fillTable();
+            printHighscores();
         }
 
         public void dbInit(string db_name)
         {
             var db_file = $"{db_name}.sqlite";
-            if (!File.Exists(db_file))
+            if (File.Exists(db_file))
             {
+                return;
+            }
+
                 SQLiteConnection.CreateFile(db_file);
                 File.SetAttributes(db_file, FileAttributes.Hidden);
-            }
+            
         }
 
         public void dbConnect(string db_name)
         {
-            _db = new SQLiteConnection($"Data Source={db_name}.sqlite;Version=3;");
-            _db.Open();
+            if (!File.Exists($"{db_name}.sqlite"))
+            {
+                MessageBox.Show("No database file");
+            }
+            else
+            {
+                _db = new SQLiteConnection($"Data Source={db_name}.sqlite;Version=3;");
+                _db.Open();
+            }
+           
         }
 
         private void createTable()
         {
-            var query = "create table IF NOT EXISTS highscores (name varchar(20), score int)";
+            if (_db == null)
+            {
+                return;
+            }
+
+            var query = "create table IF NOT EXISTS highscores (name varchar(20), added datetime)";
             var command = new SQLiteCommand(query, _db);
             command.ExecuteNonQuery();
         }
 
         private void fillTable()
         {
-            var query = "insert into highscores (name, score) values ('Me', 500)";
-            var command = new SQLiteCommand(query, _db);
-            command.ExecuteNonQuery();
-            query = "insert into highscores (name, score) values ('Myself', 400)";
-            command = new SQLiteCommand(query, _db);
-            command.ExecuteNonQuery();
-            query = "insert into highscores (name, score) values ('And I', 300)";
-            command = new SQLiteCommand(query, _db);
-            command.ExecuteNonQuery();
+            if (_db != null)
+            {
+                var query = $"insert into highscores (name, added) values ('Me', '{DateTime.Now}')";
+                var command = new SQLiteCommand(query, _db);
+                command.ExecuteNonQuery();
+                query = $"insert into highscores (name, added) values ('Myself', '{DateTime.Now}')";
+                command = new SQLiteCommand(query, _db);
+                command.ExecuteNonQuery();
+                query = $"insert into highscores (name, added) values ('And I', '{DateTime.Now}')";
+                command = new SQLiteCommand(query, _db);
+                command.ExecuteNonQuery();
+            }
         }
 
         private void printHighscores()
         {
-            var query = "select * from highscores order by score desc";
-            var command = new SQLiteCommand(query, _db);
-            var reader = command.ExecuteReader();
-            while (reader.Read())
+            if (_db != null)
+            {
+                var query = "select * from highscores order by added desc";
+                var command = new SQLiteCommand(query, _db);
+                var reader = command.ExecuteReader();
+                while (reader.Read())
 
-                Console.WriteLine("Name: " + reader["name"] + "\tScore: " + reader["score"]);
+                    Console.WriteLine("Name: " + reader[0] + "\tScore: " + Convert.ToDateTime(reader[1]));
                 Console.ReadLine();
 
-            _db.Close();
+                _db.Close();
+            }
         }
     }
 }
