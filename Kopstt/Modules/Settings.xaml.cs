@@ -1,24 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
-namespace Kopstt.Modules
+﻿namespace Kopstt.Modules
 {
-    /// <summary>
-    /// Interaction logic for Settings.xaml
-    /// </summary>
+    using System.Windows;
+    using Data.LocalDatabase;
+
     public partial class Settings
     {
+        Database _db = new Database();
         public Settings()
         {
             InitializeComponent();
@@ -39,6 +26,11 @@ namespace Kopstt.Modules
         private void checkSlack()
         {
             Slack_Settings.Visibility = Check_Slack.IsChecked == false ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private void createDatabase(object sender, RoutedEventArgs e)
+        {
+            _db.dbInit(local_database_name.Text);
         }
     }
 }
