@@ -127,7 +127,6 @@
     <Compile Include="Data\Database\Database.cs" />
     <Compile Include="Data\Database\Interfaces\IDatabase.cs" />
     <Compile Include="Data\Database\Queries\Objects.cs" />
-    <Compile Include="Data\LocalDatabase\Database.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

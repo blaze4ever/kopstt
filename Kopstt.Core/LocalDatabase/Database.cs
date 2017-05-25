@@ -1,6 +1,5 @@
-﻿using System.Windows;
-
-namespace Kopstt.Data.LocalDatabase
+﻿
+namespace Kopstt.Core.LocatDatabase
 {
     using System;
     using System.Data.SQLite;
@@ -15,6 +14,21 @@ namespace Kopstt.Data.LocalDatabase
             createTable();
             fillTable();
             printHighscores();
+        }
+
+        public string query()
+        {
+            return "Sdsdsd":
+        }
+
+        public void runQuery()
+        {
+
+        }
+
+        public void qeryReusult()
+        {
+
         }
 
         public void dbInit(string db_name)
@@ -34,7 +48,7 @@ namespace Kopstt.Data.LocalDatabase
         {
             if (!File.Exists($"{db_name}.sqlite"))
             {
-                MessageBox.Show("No database file");
+                //MessageBox.Show("No database file");
             }
             else
             {

@@ -36,6 +36,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>SQLite\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,7 +49,9 @@
   <ItemGroup>
     <Compile Include="AutoFac\DI.cs" />
     <Compile Include="CoreModule.cs" />
+    <Compile Include="DBStructure\IDatabaseOperations.cs" />
     <Compile Include="IWndowsRegistry.cs" />
+    <Compile Include="LocalDatabase\Database.cs" />
     <Compile Include="WndowsRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿namespace Kopstt.Modules
 {
     using System.Windows;
-    using Data.LocalDatabase;
+    using Core.LocatDatabase;
 
     public partial class Settings
     {
