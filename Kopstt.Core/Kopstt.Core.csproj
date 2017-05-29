@@ -52,6 +52,8 @@
     <Compile Include="DBStructure\IDatabaseOperations.cs" />
     <Compile Include="IWndowsRegistry.cs" />
     <Compile Include="LocalDatabase\Database.cs" />
+    <Compile Include="Structure\DBStructure.cs" />
+    <Compile Include="Structure\Tables\Tasks.cs" />
     <Compile Include="WndowsRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
