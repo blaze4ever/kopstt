@@ -1,14 +1,20 @@
 ﻿namespace Kopstt.Modules
 {
     using System.Windows;
-    using Core.LocatDatabase;
+    using Core.Database;
+    using Core.Database.Repositories;
+    using NHibernate.Tool.hbm2ddl;
 
     public partial class Settings
     {
-        Database _db = new Database();
         public Settings()
         {
             InitializeComponent();
+
+            var schemaUpdate = new SchemaUpdate(NHibernateHelper.Configuration);
+            schemaUpdate.Execute(false, true);
+
+            var _jobRepostiory = new NHibernateJobRepository();
 
             checkSlack();
         }
@@ -30,7 +36,7 @@
 
         private void createDatabase(object sender, RoutedEventArgs e)
         {
-            _db.dbInit(local_database_name.Text);
+           // _db.dbInit(local_database_name.Text);
         }
     }
 }

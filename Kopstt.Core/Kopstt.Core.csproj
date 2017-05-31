@@ -34,6 +34,14 @@
       <HintPath>..\packages\Autofac.4.4.0\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.1.1.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
@@ -49,16 +57,23 @@
   <ItemGroup>
     <Compile Include="AutoFac\DI.cs" />
     <Compile Include="CoreModule.cs" />
-    <Compile Include="DBStructure\IDatabaseOperations.cs" />
+    <Compile Include="Database\Mapping\Mapper.cs" />
+    <Compile Include="Database\Mapping\JobMap.cs" />
+    <Compile Include="Database\Repositories\IJobRepository.cs" />
+    <Compile Include="Database\Repositories\NHibernateJobRepository.cs" />
     <Compile Include="IWndowsRegistry.cs" />
-    <Compile Include="LocalDatabase\Database.cs" />
-    <Compile Include="Structure\DBStructure.cs" />
-    <Compile Include="Structure\Tables\Tasks.cs" />
+    <Compile Include="Database\NHibernateHelper.cs" />
     <Compile Include="WndowsRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\Models\Job.cs" />
+    <Content Include="local_hibernate.cfg.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
