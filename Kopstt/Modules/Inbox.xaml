@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
   <StackPanel Background="AliceBlue">
-      <Label Foreground="Black">inbox</Label>
+      <Label Foreground="Black">+ Add task</Label>
   </StackPanel>
 </UserControl>

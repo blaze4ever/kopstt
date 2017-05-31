@@ -1,21 +1,23 @@
-﻿namespace Kopstt.Core.Database.Repositories
+﻿using System.Windows.Forms;
+
+namespace Kopstt.Core.Database.Repositories
 {
     using Models;
     using NHibernate;
 
     public class NHibernateJobRepository : IJobRepository
     {
-        public void Delete(Job product)
+        public void Delete(Job job)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                session.Delete(product);
+                session.Delete(job);
                 transaction.Commit();
             }
         }
 
-        public Job Get(long id)
+        public Job Get(int id)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -23,22 +25,27 @@
             }
         }
 
-        public void Save(Job product)
+        public void Save(Job job)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                session.Save(product);
+                session.Save(job);
                 transaction.Commit();
+
+                if (transaction.WasCommitted)
+                {
+                    MessageBox.Show("Task added succesfully");
+                }
             }
         }
 
-        public void Update(Job product)
+        public void Update(Job job)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
             {
-                session.Update(product);
+                session.Update(job);
                 transaction.Commit();
             }
         }

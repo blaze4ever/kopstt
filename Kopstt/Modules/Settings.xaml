@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen"
         Title="Settings" SizeToContent="Height" Width="600" MinHeight="500">
     <Window.Resources>
+        
         <Style x:Key="SmallHeaderTabControl" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="controls:ControlsHelper.HeaderFontSize" Value="15" />
         </Style>
@@ -23,6 +24,7 @@
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
         </Style>
+        
     </Window.Resources>
     <TabControl TabStripPlacement="Left">
         <TabItem Header="General" >

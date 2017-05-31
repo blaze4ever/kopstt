@@ -8,7 +8,7 @@
     {
         public JobMap()
         {
-            Id(x => x.id, map => { map.Column("ID"); map.Generator(Generators.Assigned); });
+            Id(x => x.id, map => { map.Column("id"); map.Generator(Generators.Identity); });
             Property(x => x.name);
             Property(x => x.category);
             Property(x => x.added);

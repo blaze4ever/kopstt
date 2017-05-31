@@ -3,14 +3,16 @@ using System.Data;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Kopstt.Core.Database;
+using Kopstt.Core.Database.Models;
+using Kopstt.Core.Database.Repositories;
 using Kopstt.Modules;
+using NHibernate.Tool.hbm2ddl;
 
 namespace Kopstt
 {
     using System;
-    using System.Threading.Tasks;
     using System.Windows;
-    using System.Windows.Media.Animation;
     using Autofac;
     using Classes;
     using Classes.SwitchingModules;
@@ -26,6 +28,7 @@ namespace Kopstt
         private DependencyObject current_module;
         private FadeAnimation _fade;
         private ClearModules _clear;
+        private NHibernateJobRepository _jobRepostiory;
 
         public MainWindow(SetOnStartup add_to_registry, 
                             Today today,
@@ -55,6 +58,10 @@ namespace Kopstt
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             worker.RunWorkerAsync();
 
+            var schemaUpdate = new SchemaUpdate(NHibernateHelper.Configuration);
+            schemaUpdate.Execute(false, true);
+            _jobRepostiory = new NHibernateJobRepository();
+
         }
 
 
@@ -63,12 +70,12 @@ namespace Kopstt
             var url = "https://hooks.slack.com/services/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";
             var webhookUrl = new Uri(url);
             var slackClient = new SlackClient(webhookUrl);
-            var message = Message.Text;
-            var response = await slackClient.SendMessageAsync(message);
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine("Cannot send message to slack");
-            }
+            //var message = Message.Text;
+            //var response = await slackClient.SendMessageAsync(message);
+            //if (!response.IsSuccessStatusCode)
+           // {
+           //     Console.WriteLine("Cannot send message to slack");
+          //  }
         }
 
         private void addToRegistry(object sender, RoutedEventArgs e)
@@ -136,6 +143,34 @@ namespace Kopstt
             Menu.SelectedIndex = 0;
             var settings = new Settings();
             settings.ShowDialog();
+        }
+
+        private void CancelAdding(object sender, MouseButtonEventArgs e)
+        {
+            Adding_Task_Holder.Visibility = Visibility.Collapsed;
+            Task_Content.Text = string.Empty;
+        }
+
+        private void AddTask(object sender, RoutedEventArgs e)
+        {
+            var job = new Job
+            {
+                name = Task_Content.Text,
+                added = DateTime.Now,
+                archived = false,
+                category = 1,
+                done = false,
+                execution = DateTime.Now,
+                priority = 1
+            };
+
+            _jobRepostiory.Save(job);
+        }
+
+        private void TaskAddingInit(object sender, MouseButtonEventArgs e)
+        {
+            Adding_Task_Holder.Visibility = Visibility.Visible;
+            Task_Content.Focus();
         }
     }
 }

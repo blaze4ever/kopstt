@@ -1,9 +1,6 @@
 ﻿namespace Kopstt.Modules
 {
     using System.Windows;
-    using Core.Database;
-    using Core.Database.Repositories;
-    using NHibernate.Tool.hbm2ddl;
 
     public partial class Settings
     {
@@ -11,9 +8,7 @@
         {
             InitializeComponent();
 
-            var schemaUpdate = new SchemaUpdate(NHibernateHelper.Configuration);
-            schemaUpdate.Execute(false, true);
-            var _jobRepostiory = new NHibernateJobRepository();
+            
 
             checkSlack();
         }

@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen" 
         WindowState="Maximized" 
         WindowStyle="SingleBorderWindow" 
-        BorderBrush="Aqua">
+        BorderBrush="DodgerBlue">
     <Window.Resources>
         <ResourceDictionary>
             <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
@@ -81,8 +81,16 @@
                     </StackPanel>
                 </TabItem.Header>
                 <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <TextBox Name="Message" />
-                    <Button Click="sendSlackMessage" Content="Send" />
+                    <!--<TextBox Name="Message" />
+                    <Button Click="sendSlackMessage" Content="Send" />-->
+                    <StackPanel  Margin="10" Name="Adding_Task_Holder" Visibility="Collapsed">
+                        <TextBox HorizontalAlignment="Stretch" MinWidth="500" Padding="8" Name="Task_Content" />
+                            <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                            <Button Click="AddTask" Background="DodgerBlue" Foreground="White">Add task</Button>
+                            <Label MouseLeftButtonUp="CancelAdding">Cancel</Label>
+                        </StackPanel>
+                    </StackPanel>
+                    <Label Foreground="DodgerBlue" FontWeight="Bold" Margin="10" MouseLeftButtonUp="TaskAddingInit">+ Add task</Label>
                 </StackPanel>
             </TabItem>
             <TabItem>

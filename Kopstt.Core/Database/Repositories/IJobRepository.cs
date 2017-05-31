@@ -4,7 +4,7 @@
 
     public interface IJobRepository
     {
-        Job Get(long id);
+        Job Get(int id);
         void Save(Job task);
         void Update(Job task);
         void Delete(Job task);
