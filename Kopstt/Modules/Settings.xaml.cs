@@ -13,7 +13,6 @@
 
             var schemaUpdate = new SchemaUpdate(NHibernateHelper.Configuration);
             schemaUpdate.Execute(false, true);
-
             var _jobRepostiory = new NHibernateJobRepository();
 
             checkSlack();
