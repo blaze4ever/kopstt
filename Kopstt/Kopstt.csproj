@@ -126,6 +126,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Dialogs\CustomInputDialog.cs" />
+    <Compile Include="Classes\ShowMessage.cs" />
     <Compile Include="Classes\SlackClient.cs" />
     <Compile Include="Classes\SwitchingModules\ClearModules.cs" />
     <Compile Include="Classes\SwitchingModules\FadeAnimation.cs" />

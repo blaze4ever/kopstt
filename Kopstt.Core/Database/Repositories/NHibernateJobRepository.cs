@@ -2,11 +2,14 @@
 
 namespace Kopstt.Core.Database.Repositories
 {
+    using System;
     using Models;
     using NHibernate;
 
     public class NHibernateJobRepository : IJobRepository
     {
+        private bool completed;
+
         public void Delete(Job job)
         {
             using (ISession session = NHibernateHelper.OpenSession())
@@ -35,8 +38,13 @@ namespace Kopstt.Core.Database.Repositories
 
                 if (transaction.WasCommitted)
                 {
-                    MessageBox.Show("Task added succesfully");
+                    completed = true;
                 }
+                else
+                {
+                    completed = false;
+                }
+                
             }
         }
 
@@ -48,6 +56,11 @@ namespace Kopstt.Core.Database.Repositories
                 session.Update(job);
                 transaction.Commit();
             }
+        }
+
+        public bool IsProcessed()
+        {
+            return completed;
         }
     }
 }

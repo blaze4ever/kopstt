@@ -29,6 +29,7 @@ namespace Kopstt
         private FadeAnimation _fade;
         private ClearModules _clear;
         private NHibernateJobRepository _jobRepostiory;
+        private ShowMessage dialog;
 
         public MainWindow(SetOnStartup add_to_registry, 
                             Today today,
@@ -61,6 +62,7 @@ namespace Kopstt
             var schemaUpdate = new SchemaUpdate(NHibernateHelper.Configuration);
             schemaUpdate.Execute(false, true);
             _jobRepostiory = new NHibernateJobRepository();
+            dialog = new ShowMessage();
 
         }
 
@@ -165,6 +167,13 @@ namespace Kopstt
             };
 
             _jobRepostiory.Save(job);
+            var result = _jobRepostiory.IsProcessed();
+
+
+            if(result)
+            {
+                dialog.ShowMessageDialog(this, null, this);
+            }
         }
 
         private void TaskAddingInit(object sender, MouseButtonEventArgs e)
